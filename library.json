@@ -1,0 +1,24 @@
+{
+  "name": "S5851A",
+  "description": "A temperature sensor library for Arduino",
+  "keywords": "sensor, color",
+  "authors":
+  {
+    "name": "Hideki Hamada",
+    "email": "jakalada.net@gmail.com"
+  },
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/jakalada/Arduino-S5851A.git"
+  },
+  "version": "0.0.1",
+  "url": "https://github.com/jakalada/Arduino-S5851A",
+  "frameworks": "arduino",
+  "platforms":
+  [
+    "atmelavr",
+    "espressif8266",
+    "intel_arc32"
+  ]
+}

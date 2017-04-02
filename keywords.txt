@@ -1,0 +1,11 @@
+# KEYWORD1 specifies datatypes
+
+S5851A	KEYWORD1
+
+# KEYWORD2 specifies methods and functions
+
+begin	KEYWORD2
+update	KEYWORD2
+getRawTemp	KEYWORD2
+getTempC	KEYWORD2
+getTempF	KEYWORD2

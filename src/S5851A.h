@@ -1,0 +1,34 @@
+/**********************************************************************
+  Sensor Datasheet:
+    - EN: http://datasheet.sii-ic.com/en/temperature_sensor/S5851A_E.pdf
+    - JP: http://akizukidenshi.com/download/ds/sii/S5851A_J.pdf
+**********************************************************************/
+
+#ifndef S5851A_H
+#define S5851A_H
+
+#include <stdbool.h>
+#include <stdint.h>
+
+class S5851A {
+ private:
+  int16_t _rawTemp;
+  uint8_t _i2cAddress;
+
+  bool write(uint8_t value);
+  bool write(const uint8_t *values, size_t size);
+  bool read(uint8_t *values, size_t size);
+  bool readRegister(uint8_t address, uint8_t *value);
+  bool readRegisters(uint8_t address, uint8_t *values, uint8_t size);
+  bool writeRegister(uint8_t address, uint8_t value);
+
+ public:
+  S5851A(uint8_t i2cAddress);
+  void begin();
+  bool update();
+  double getTempC();
+  double getTempF();
+  int16_t getRawTemp();
+};
+
+#endif
