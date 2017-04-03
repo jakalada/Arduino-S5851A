@@ -9,3 +9,5 @@ update	KEYWORD2
 getRawTemp	KEYWORD2
 getTempC	KEYWORD2
 getTempF	KEYWORD2
+resetByGeneralCall	KEYWORD2
+reinstallAddressByGeneralCall	KEYWORD2
