@@ -4,6 +4,10 @@
 
 S-5851A (temperature sensor) library for Arduino.
 
+## Support Sensor
+
+- [S-5851A | SII Semiconductor Corporation (Seiko Instruments Group)](http://www.sii-ic.com/en/semicon/datasheets/sensor/temperature-sensor-ic/s-5851a/)
+
 ## Install
 
 [Download the latest library release.](https://github.com/jakalada/Arduino-S5851A/releases/latest)
