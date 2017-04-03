@@ -14,7 +14,7 @@
 
   Sensor Datasheet:
     - EN: http://datasheet.sii-ic.com/en/temperature_sensor/S5851A_E.pdf
-    - JP: http://akizukidenshi.com/download/ds/sii/S5851A_J.pdf
+    - JP: http://datasheet.sii-ic.com/jp/temperature_sensor/S5851A_J.pdf
 **********************************************************************/
 
 #include <S5851A.h>
