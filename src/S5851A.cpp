@@ -13,6 +13,11 @@
 #define REG_TEMPERATURE 0x00
 #define REG_CONFIGURATION 0x01
 
+// General Call
+#define ADDR_GENERAL_CALL 0x00
+#define GENERAL_CALL_RESET 0x04
+#define GENERAL_CALL_REINSTALL_ADDR 0x06
+
 S5851A::S5851A(uint8_t i2cAddress) {
   _i2cAddress = i2cAddress;
   _rawTemp = 0;
@@ -37,6 +42,37 @@ double S5851A::getTempC() { return (double)_rawTemp * 0.0625; }
 double S5851A::getTempF() { return getTempC() * 9.0 / 5.0 + 32.0; }
 
 int16_t S5851A::getRawTemp() { return _rawTemp; }
+
+bool S5851A::resetByGeneralCall() { return generalCall(GENERAL_CALL_RESET); }
+
+bool S5851A::generalCall(const uint8_t value) {
+  Wire.beginTransmission(ADDR_GENERAL_CALL);
+
+  if (Wire.write(&value, 1) == 1) {
+    switch (Wire.endTransmission()) {
+      case 0:  // success
+        return true;
+
+      case 1:  // data too long to fit in transmit buffer
+        return false;
+
+      case 2:  // received NACK on transmit of address
+        return false;
+
+      case 3:  // received NACK on transmit of data
+        return false;
+
+      case 4:  // other error
+        return false;
+
+      default:  // module unknown error
+        return false;
+    }
+  } else {
+    Wire.endTransmission();
+    return false;
+  }
+}
 
 bool S5851A::write(uint8_t value) {
   uint8_t values[1] = {value};

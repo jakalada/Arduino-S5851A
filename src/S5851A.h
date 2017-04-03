@@ -15,6 +15,7 @@ class S5851A {
   int16_t _rawTemp;
   uint8_t _i2cAddress;
 
+  bool generalCall(uint8_t value);
   bool write(uint8_t value);
   bool write(const uint8_t *values, size_t size);
   bool read(uint8_t *values, size_t size);
@@ -29,6 +30,7 @@ class S5851A {
   double getTempC();
   double getTempF();
   int16_t getRawTemp();
+  bool resetByGeneralCall();
 };
 
 #endif
