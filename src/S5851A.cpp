@@ -45,6 +45,10 @@ int16_t S5851A::getRawTemp() { return _rawTemp; }
 
 bool S5851A::resetByGeneralCall() { return generalCall(GENERAL_CALL_RESET); }
 
+bool S5851A::reinstallAddressByGeneralCall() {
+  return generalCall(GENERAL_CALL_REINSTALL_ADDR);
+}
+
 bool S5851A::generalCall(const uint8_t value) {
   Wire.beginTransmission(ADDR_GENERAL_CALL);
 

@@ -31,6 +31,7 @@ class S5851A {
   double getTempF();
   int16_t getRawTemp();
   bool resetByGeneralCall();
+  bool reinstallAddressByGeneralCall();
 };
 
 #endif
