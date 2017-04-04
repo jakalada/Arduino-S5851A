@@ -1,7 +1,7 @@
 {
   "name": "S5851A",
   "description": "A temperature sensor library for Arduino",
-  "keywords": "sensor, color",
+  "keywords": "sensor, temperature",
   "authors":
   {
     "name": "Hideki Hamada",
