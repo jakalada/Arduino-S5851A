@@ -27,7 +27,8 @@ void S5851A::begin() { Wire.begin(); }
 
 bool S5851A::update() {
   uint8_t values[2];
-  if (readRegisters(REG_TEMPERATURE, values, sizeof(values))) {
+  if (readRegisters(REG_TEMPERATURE, values,
+                    sizeof(values) / sizeof(values[0]))) {
     int16_t rawValue = (int16_t)word(values[0], values[1]);
     rawValue >>= 4;
     _rawTemp = rawValue;
@@ -150,5 +151,5 @@ bool S5851A::readRegisters(uint8_t address, uint8_t *values, uint8_t size) {
 
 bool S5851A::writeRegister(uint8_t address, uint8_t value) {
   uint8_t values[2] = {address, value};
-  return write(values, sizeof(values));
+  return write(values, sizeof(values) / sizeof(values[0]));
 }
