@@ -84,6 +84,10 @@ bool S5851A::write(uint8_t value) {
 }
 
 bool S5851A::write(const uint8_t *values, size_t size) {
+  if (size <= 0) {
+    return false;
+  }
+
   Wire.beginTransmission(_i2cAddress);
 
   if (Wire.write(values, size) == size) {
@@ -113,9 +117,13 @@ bool S5851A::write(const uint8_t *values, size_t size) {
 }
 
 bool S5851A::read(uint8_t *values, size_t size) {
+  if (size <= 0) {
+    return false;
+  }
+
   Wire.requestFrom(_i2cAddress, size);
-  if (Wire.available() == size) {
-    for (int8_t i = 0; i < size; i++) {
+  if (Wire.available() == (int)size) {
+    for (int8_t i = 0; i < (int8_t)size; i++) {
       values[i] = Wire.read();
     }
     return true;
@@ -129,6 +137,10 @@ bool S5851A::readRegister(uint8_t address, uint8_t *value) {
 }
 
 bool S5851A::readRegisters(uint8_t address, uint8_t *values, uint8_t size) {
+  if (size <= 0) {
+    return false;
+  }
+
   if (!write(address)) {
     return false;
   }
