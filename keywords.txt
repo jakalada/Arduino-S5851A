@@ -11,3 +11,8 @@ getTempC	KEYWORD2
 getTempF	KEYWORD2
 resetByGeneralCall	KEYWORD2
 reinstallAddressByGeneralCall	KEYWORD2
+shutdown	KEYWORD2
+startup	KEYWORD2
+requestOneshot	KEYWORD2
+checkOneshotFinished	KEYWORD2
+waitForOneshotFinished	KEYWORD2
