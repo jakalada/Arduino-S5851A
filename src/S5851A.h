@@ -17,10 +17,10 @@ class S5851A {
 
   bool generalCall(uint8_t value);
   bool write(uint8_t value);
-  bool write(const uint8_t *values, size_t size);
-  bool read(uint8_t *values, size_t size);
+  bool write(const uint8_t *values, size_t length);
+  bool read(uint8_t *values, size_t length);
   bool readRegister(uint8_t address, uint8_t *value);
-  bool readRegisters(uint8_t address, uint8_t *values, uint8_t size);
+  bool readRegisters(uint8_t address, uint8_t *values, uint8_t length);
   bool writeRegister(uint8_t address, uint8_t value);
 
  public:
