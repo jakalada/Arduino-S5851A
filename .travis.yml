@@ -9,8 +9,10 @@ cache:
         - "~/.platformio"
 
 env:
+    - PLATFORMIO_CI_SRC=examples/OneshotUpdateTest
     - PLATFORMIO_CI_SRC=examples/ReadTemperature
     - PLATFORMIO_CI_SRC=examples/ReinstallAddressTest
+    - PLATFORMIO_CI_SRC=examples/ShutdownTest
 
 install:
     - pip install -U platformio
