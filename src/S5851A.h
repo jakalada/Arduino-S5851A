@@ -34,6 +34,9 @@ class S5851A {
   bool reinstallAddressByGeneralCall();
   bool shutdown();
   bool startup();
+  bool requestOneshot();
+  bool checkOneshotFinished();
+  bool waitForOneshotFinished(uint16_t timeoutMillis);
 };
 
 #endif

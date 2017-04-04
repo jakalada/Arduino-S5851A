@@ -54,6 +54,42 @@ bool S5851A::shutdown() { return writeRegister(REG_CONFIGURATION, 0x01); }
 
 bool S5851A::startup() { return writeRegister(REG_CONFIGURATION, 0x00); }
 
+bool S5851A::requestOneshot() { return writeRegister(REG_CONFIGURATION, 0x81); }
+
+bool S5851A::checkOneshotFinished() {
+  uint8_t bits = 0x00;
+  bool result = readRegister(REG_CONFIGURATION, &bits);
+  if (result) {
+    return !(bits & 0x80);
+  } else {
+    // Read failed
+    return false;
+  }
+}
+
+bool S5851A::waitForOneshotFinished(uint16_t timeoutMillis) {
+  unsigned long startMillis = millis();
+  while (1) {
+    uint8_t bits = 0x00;
+    bool result = readRegister(REG_CONFIGURATION, &bits);
+    if (!result) {
+      // Read failed
+      return false;
+    }
+
+    if (!(bits & 0x80)) {
+      // Oneshot update finished
+      return true;
+    }
+
+    delay(100);
+    if (millis() - startMillis >= timeoutMillis) {
+      // Timeout
+      return false;
+    }
+  }
+}
+
 bool S5851A::generalCall(const uint8_t value) {
   Wire.beginTransmission(ADDR_GENERAL_CALL);
 
