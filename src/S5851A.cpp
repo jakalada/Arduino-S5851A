@@ -50,6 +50,10 @@ bool S5851A::reinstallAddressByGeneralCall() {
   return generalCall(GENERAL_CALL_REINSTALL_ADDR);
 }
 
+bool S5851A::shutdown() { return writeRegister(REG_CONFIGURATION, 0x01); }
+
+bool S5851A::startup() { return writeRegister(REG_CONFIGURATION, 0x00); }
+
 bool S5851A::generalCall(const uint8_t value) {
   Wire.beginTransmission(ADDR_GENERAL_CALL);
 
