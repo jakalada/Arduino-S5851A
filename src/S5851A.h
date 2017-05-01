@@ -7,11 +7,13 @@
 #ifndef S5851A_H
 #define S5851A_H
 
-#include <stdbool.h>
 #include <stdint.h>
+
+#include <Wire.h>
 
 class S5851A {
  private:
+  TwoWire *_wire;
   int16_t _rawTemp;
   uint8_t _i2cAddress;
 
@@ -24,8 +26,7 @@ class S5851A {
   bool writeRegister(uint8_t address, uint8_t value);
 
  public:
-  S5851A(uint8_t i2cAddress);
-  void begin();
+  S5851A(uint8_t i2cAddress, TwoWire *wire=&Wire);
   bool update();
   double getTempC();
   double getTempF();

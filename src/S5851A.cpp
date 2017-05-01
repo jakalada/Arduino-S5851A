@@ -18,12 +18,11 @@
 #define GENERAL_CALL_RESET 0x04
 #define GENERAL_CALL_REINSTALL_ADDR 0x06
 
-S5851A::S5851A(uint8_t i2cAddress) {
+S5851A::S5851A(uint8_t i2cAddress, TwoWire *wire) {
+  _wire = wire;
   _i2cAddress = i2cAddress;
   _rawTemp = 0;
 }
-
-void S5851A::begin() { Wire.begin(); }
 
 bool S5851A::update() {
   uint8_t values[2];
@@ -91,10 +90,10 @@ bool S5851A::waitForOneshotFinished(uint16_t timeoutMillis) {
 }
 
 bool S5851A::generalCall(const uint8_t value) {
-  Wire.beginTransmission(ADDR_GENERAL_CALL);
+  _wire->beginTransmission(ADDR_GENERAL_CALL);
 
-  if (Wire.write(&value, 1) == 1) {
-    switch (Wire.endTransmission()) {
+  if (_wire->write(&value, 1) == 1) {
+    switch (_wire->endTransmission()) {
       case 0:  // success
         return true;
 
@@ -114,7 +113,7 @@ bool S5851A::generalCall(const uint8_t value) {
         return false;
     }
   } else {
-    Wire.endTransmission();
+    _wire->endTransmission();
     return false;
   }
 }
@@ -129,10 +128,10 @@ bool S5851A::write(const uint8_t *values, size_t length) {
     return false;
   }
 
-  Wire.beginTransmission(_i2cAddress);
+  _wire->beginTransmission(_i2cAddress);
 
-  if (Wire.write(values, length) == length) {
-    switch (Wire.endTransmission()) {
+  if (_wire->write(values, length) == length) {
+    switch (_wire->endTransmission()) {
       case 0:  // success
         return true;
 
@@ -152,7 +151,7 @@ bool S5851A::write(const uint8_t *values, size_t length) {
         return false;
     }
   } else {
-    Wire.endTransmission();
+    _wire->endTransmission();
     return false;
   }
 }
@@ -162,10 +161,10 @@ bool S5851A::read(uint8_t *values, size_t length) {
     return false;
   }
 
-  Wire.requestFrom(_i2cAddress, length);
-  if (Wire.available() == (int)length) {
+  _wire->requestFrom(_i2cAddress, length);
+  if (_wire->available() == (int)length) {
     for (size_t i = 0; i < (size_t)length; i++) {
-      values[i] = Wire.read();
+      values[i] = _wire->read();
     }
     return true;
   } else {

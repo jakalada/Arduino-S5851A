@@ -25,7 +25,7 @@ S5851A sensor(0x48);
 
 void setup() {
   Serial.begin(9600);
-  sensor.begin();
+  Wire.begin();
 
   // Reset all connected S-5851A sensor by I2C General Call Address.
   // Refer to "8. General call" on datasheet.
