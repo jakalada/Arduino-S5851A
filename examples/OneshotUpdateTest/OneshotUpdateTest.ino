@@ -31,7 +31,9 @@ void setup() {
   // Refer to "8. General call" on datasheet.
   if (!sensor.resetByGeneralCall()) {
     Serial.println("failed: reset by general call");
-    while(1) {};
+    while(1) {
+      delay(100);
+    };
   }
   delay(100);
 
